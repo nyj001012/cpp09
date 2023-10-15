@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 12:09:16 by yena              #+#    #+#             */
-/*   Updated: 2023/10/15 15:07:28 by yena             ###   ########.fr       */
+/*   Updated: 2023/10/15 15:17:02 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,13 @@ std::multimap<std::string, float> BitcoinExchange::getBitcoinData() {
   return this->_bitcoin_data;
 }
 
+/**
+ * 날짜가 유효한지 검사한다.
+ * @param year 년도
+ * @param month 월
+ * @param day 일
+ * @return true or false
+ */
 bool isValidDate(std::string year, std::string month, std::string day) {
   int i_year = std::stoi(year);
   int i_month = std::stoi(month);
@@ -51,7 +58,7 @@ bool isValidDate(std::string year, std::string month, std::string day) {
     return false;
   if (i_month < 1 || i_month > 12)
     return false;
-  if (i_year % 4 == 0 && i_year % 100 != 0 || i_year % 400 == 0)
+  if ((i_year % 4 == 0 && i_year % 100 != 0) || i_year % 400 == 0)
     days_per_month[1] = 29;
   if (i_day < 1 || i_day > days_per_month[i_month - 1])
     return false;
@@ -59,9 +66,9 @@ bool isValidDate(std::string year, std::string month, std::string day) {
 }
 
 /**
- * 날짜 유효성 검사
- * @param date
- * @return
+ * 날짜의 형식이 올바른지 검사한다.
+ * @param date 날짜
+ * @return true or false
  */
 bool isValidDateFormat(std::string date) {
   std::string year = date.substr(0, 4);
@@ -81,6 +88,10 @@ bool isValidDateFormat(std::string date) {
   return true;
 }
 
+/**
+ * 비트코인 구입 날짜와 구입 개수를 입력받아 멀티맵에 저장한다.
+ * @param file_name 비트코인 구입 날짜와 구입 개수가 저장된 파일 이름
+ */
 void BitcoinExchange::readBitcoinData(std::string file_name) {
   std::ifstream file(file_name);
   std::string line;
@@ -100,6 +111,13 @@ void BitcoinExchange::readBitcoinData(std::string file_name) {
   file.close();
 }
 
+/**
+ * 비트코인의 시세에 따른 가격을 계산한다. 만약 시세표에 없는 날짜라면 가장 가까운 이전 날짜의 가격을 사용한다.
+ * @param date 비트코인 구입 날짜
+ * @param count 비트코인 구입 개수
+ * @param data 비트코인 시세표
+ * @return 비트코인 가격
+ */
 float calculatePrice(std::string date, float count, std::map<std::string, float> data) {
   float price = 0;
 
@@ -119,6 +137,10 @@ float calculatePrice(std::string date, float count, std::map<std::string, float>
   return price;
 }
 
+/**
+ * "input.txt의 date => input.txt의 count = price"의 형식으로 출력한다.
+ * @param data 비트코인 시세표
+ */
 void BitcoinExchange::printPrice(std::map<std::string, float> data) {
   std::multimap<std::string, float>::iterator it;
   std::multimap<std::string, float> bitcoin_data = this->getBitcoinData();
