@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 13:10:42 by yena              #+#    #+#             */
-/*   Updated: 2023/10/15 13:18:02 by yena             ###   ########.fr       */
+/*   Updated: 2023/10/15 15:01:46 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ class Database {
   Database(const Database &copy);
   Database &operator=(const Database &copy);
   ~Database();
-  static std::map<std::string, double> readDatabase();
+  static std::map<std::string, float> readDatabase();
 };
 
 #endif //EX00__DATABASE_HPP_
