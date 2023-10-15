@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 12:09:16 by yena              #+#    #+#             */
-/*   Updated: 2023/10/15 15:17:02 by yena             ###   ########.fr       */
+/*   Updated: 2023/10/15 15:19:18 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,22 +93,24 @@ bool isValidDateFormat(std::string date) {
  * @param file_name 비트코인 구입 날짜와 구입 개수가 저장된 파일 이름
  */
 void BitcoinExchange::readBitcoinData(std::string file_name) {
-  std::ifstream file(file_name);
+  std::ifstream ifs(file_name);
   std::string line;
   std::string key;
   std::string value;
 
-  if (!file.is_open())
+  if (!ifs.is_open())
     throw std::runtime_error("Error: file not found");
-  std::getline(file, line);
-  while (std::getline(file, line)) {
+  std::getline(ifs, line);
+  while (std::getline(ifs, line)) {
     key = line.substr(0, line.find(" | "));
     value = line.substr(line.find(" | ") + 3);
-    if (key.empty() || value.empty())
+    if (key.empty() || value.empty()) {
+      ifs.close();
       throw std::runtime_error("Error: invalid file format");
+    }
     this->setBitcoinData(key, std::stod(value));
   }
-  file.close();
+  ifs.close();
 }
 
 /**
