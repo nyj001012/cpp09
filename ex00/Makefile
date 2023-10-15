@@ -1,6 +1,7 @@
-NAME = bureaucrat
+NAME = btc
 SRCS = main.cpp \
-	   Bureaucrat.cpp
+	   BitcoinExchange.cpp \
+	   Database.cpp
 OBJS = ${SRCS:.cpp=.o}
 
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g
