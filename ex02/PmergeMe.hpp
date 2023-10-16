@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:02:21 by yena              #+#    #+#             */
-/*   Updated: 2023/10/16 15:12:59 by yena             ###   ########.fr       */
+/*   Updated: 2023/10/16 16:58:40 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@
 #include <iostream>
 #include <vector>
 #include <list>
+#include <algorithm>
 #include "font.hpp"
 
 class PmergeMe {
  public:
   PmergeMe();
-  PmergeMe(std::vector<int> v, std::list<int> l);
+  PmergeMe(std::vector<int> vector, std::list<int> list, int element_count);
   PmergeMe(const PmergeMe &other);
   PmergeMe &operator=(const PmergeMe &other);
   ~PmergeMe();

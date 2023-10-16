@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:56:27 by yena              #+#    #+#             */
-/*   Updated: 2023/10/16 14:47:47 by yena             ###   ########.fr       */
+/*   Updated: 2023/10/16 18:52:33 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void printInfo(int argc, char *argv[]) {
   for (int i = 0; i < argv_vector.size(); i++) {
     std::cout << argv_vector[i] << " ";
   }
+  std::cout << std::endl;
 }
 
 int main(int argc, char *argv[]) {
@@ -34,13 +35,14 @@ int main(int argc, char *argv[]) {
               << "Error: Wrong number of arguments"
               << FB_DEFAULT << std::endl;
   } else {
+    printInfo(argc, argv);
     std::vector<int> argv_vector;
     std::list<int> argv_list;
     for (int i = 1; i < argc; i++) {
       argv_vector.push_back(std::stoi(argv[i]));
       argv_list.push_back(std::stoi(argv[i]));
     }
-    PmergeMe pmergeMe(argv_vector, argv_list);
+    PmergeMe pmergeMe(argv_vector, argv_list, argc - 1);
     pmergeMe.sort();
   }
   return 0;
