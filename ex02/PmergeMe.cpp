@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:02:21 by yena              #+#    #+#             */
-/*   Updated: 2023/10/16 15:10:28 by yena             ###   ########.fr       */
+/*   Updated: 2023/10/16 15:13:11 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,27 @@ void PmergeMe::setElementCount(int element_count) {
   this->_element_count = element_count;
 }
 
+/**
+ * sort vector with Ford-Johnson algorithm
+ * @param vector
+ * @return
+ */
 double sortVector(std::vector<int> vector) {
   clock_t start, end;
-  double time;
+  float time;
 
   start = clock();
-  std::sort(vector.begin(), vector.end());
+
   end = clock();
   time = static_cast<double>(end - start);
   return time;
 }
 
+/**
+ * sort list with Ford-Johnson algorithm
+ * @param list
+ * @return
+ */
 double sortList(std::list<int> list) {
   clock_t start, end;
   double time;
@@ -87,13 +97,13 @@ double sortList(std::list<int> list) {
 }
 
 void PmergeMe::sort() {
-  float vector_time = sortVector(this->getVector());
-  float list_time = sortList(this->getList());
+  double vector_time = sortVector(this->getVector());
+  double list_time = sortList(this->getList());
   this->printResult("std::vector", vector_time);
   this->printResult("std::list", list_time);
 }
 
-void PmergeMe::printResult(std::string data_type, float time) const {
+void PmergeMe::printResult(std::string data_type, double time) const {
   std::cout << "Time to process a range of\t"
             << this->getElementCount()
             << " elements with "
