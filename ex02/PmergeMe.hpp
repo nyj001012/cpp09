@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:02:21 by yena              #+#    #+#             */
-/*   Updated: 2023/10/16 14:49:02 by yena             ###   ########.fr       */
+/*   Updated: 2023/10/16 15:05:33 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,17 @@ class PmergeMe {
   ~PmergeMe();
   std::vector<int> getVector() const;
   std::list<int> getList() const;
+  int getElementCount() const;
   void setVector(std::vector<int> v);
   void setList(std::list<int> l);
+  void setElementCount(int element_count);
   void sort();
-  void printResult(std::string data_type, double time) const;
+  void printResult(std::string data_type, float time) const;
 
  private:
   std::vector<int> _vector;
   std::list<int> _list;
+  int _element_count;
 };
 
 #endif //EX02__PMERGEME_HPP_
