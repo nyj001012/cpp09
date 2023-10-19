@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yena <yena@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:02:21 by yena              #+#    #+#             */
-/*   Updated: 2023/10/16 18:54:27 by yena             ###   ########.fr       */
+/*   Updated: 2023/10/19 17:46:03 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 
 PmergeMe::PmergeMe() {}
 
-PmergeMe::PmergeMe(std::vector<int> vector, std::list<int> list, int element_count) {
+PmergeMe::PmergeMe(std::vector<int> vector, std::list<int> list,
+                   int element_count) {
   this->_vector = vector;
   this->_list = list;
   this->_element_count = element_count;
@@ -41,25 +42,15 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &other) {
 
 PmergeMe::~PmergeMe() {}
 
-std::vector<int> PmergeMe::getVector() const {
-  return this->_vector;
-}
+std::vector<int> PmergeMe::getVector() const { return this->_vector; }
 
-std::list<int> PmergeMe::getList() const {
-  return this->_list;
-}
+std::list<int> PmergeMe::getList() const { return this->_list; }
 
-int PmergeMe::getElementCount() const {
-  return this->_element_count;
-}
+int PmergeMe::getElementCount() const { return this->_element_count; }
 
-void PmergeMe::setVector(std::vector<int> vector) {
-  this->_vector = vector;
-}
+void PmergeMe::setVector(std::vector<int> vector) { this->_vector = vector; }
 
-void PmergeMe::setList(std::list<int> list) {
-  this->_list = list;
-}
+void PmergeMe::setList(std::list<int> list) { this->_list = list; }
 
 void PmergeMe::setElementCount(int element_count) {
   this->_element_count = element_count;
@@ -75,12 +66,12 @@ void PmergeMe::setElementCount(int element_count) {
  * @param smaller
  * @return
  */
-std::vector<std::pair<int, int> > divide_into_bigger_smaller(std::vector<int> vector) {
+std::vector<std::pair<int, int> > divide_into_bigger_smaller(
+    std::vector<int> vector) {
   int size = vector.size() % 2 == 1 ? vector.size() - 1 : vector.size();
   std::vector<std::pair<int, int> > pair_vector;
 
-  if (vector.size() % 2 == 1)
-    vector.push_back(0);
+  if (vector.size() % 2 == 1) vector.push_back(0);
   for (int i = 0; i < size; i += 2) {
     if (vector[i] > vector[i + 1]) {
       std::pair<int, int> pair = std::make_pair(vector[i], vector[i + 1]);
@@ -107,7 +98,6 @@ void binary_search_vector(std::vector<int> *vector, int element) {
   int right = vector->size() - 1;
   int mid;
 
-  // 3 6 7 9
   while (left <= right) {
     mid = (left + right) / 2;
     if (vector->at(mid) < element) {
@@ -119,7 +109,8 @@ void binary_search_vector(std::vector<int> *vector, int element) {
   vector->insert(vector->begin() + left, element);
 }
 
-void recursive_sort_vector(std::vector<std::pair<int, int> > *vector, int index) {
+void recursive_sort_vector(std::vector<std::pair<int, int> > *vector,
+                           int index) {
   if (index == vector->size() - 1) {
     return;
   }
@@ -129,7 +120,8 @@ void recursive_sort_vector(std::vector<std::pair<int, int> > *vector, int index)
   recursive_sort_vector(vector, index + 1);
 }
 
-std::vector<int> sort_pair(std::vector<int> vector, std::vector<std::pair<int, int> > pair_vector) {
+std::vector<int> sort_pair(std::vector<int> vector,
+                           std::vector<std::pair<int, int> > pair_vector) {
   recursive_sort_vector(&pair_vector, 0);
   std::vector<int> sorted_vector;
 
@@ -198,12 +190,7 @@ void PmergeMe::sort() {
 }
 
 void PmergeMe::printResult(std::string data_type, double time) const {
-  std::cout << "Time to process a range of\t"
-            << this->getElementCount()
-            << " elements with "
-            << data_type
-            << "\t: "
-            << time
-            << " ms"
+  std::cout << "Time to process a range of\t" << this->getElementCount()
+            << " elements with " << data_type << "\t: " << time << " ms"
             << std::endl;
 }
