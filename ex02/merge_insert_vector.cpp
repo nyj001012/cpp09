@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 19:42:48 by yena              #+#    #+#             */
-/*   Updated: 2023/10/19 19:59:07 by yena             ###   ########.fr       */
+/*   Updated: 2023/10/19 21:42:43 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,9 @@
  * 벡터의 원소를 큰 것과 작은 것으로 이루어진 쌍(pair)의 벡터로 나눈다.
  * 만약 원소의 개수가 홀수라면 마지막 원소는 (vector[size - 1], 0)으로 채워진다.
  * @param vector 벡터
- * @param bigger
- * @param smaller
  * @return 짝으로 이루어진 벡터
  */
-std::vector<std::pair<int, int> > make_pairs_vector(std::vector<int> vector) {
+std::vector<std::pair<int, int> > makePairsVector(std::vector<int> vector) {
     int size = vector.size() % 2 == 1 ? vector.size() - 1 : vector.size();
     std::vector<std::pair<int, int> > pair_vector;
 
@@ -46,8 +44,8 @@ std::vector<std::pair<int, int> > make_pairs_vector(std::vector<int> vector) {
  * @param vector 정렬될 벡터
  * @param element 정렬할 원소
  */
-void insertion_sort_vector(std::vector<int> *vector, int element) {
-    for (int i = 0; i < vector->size(); i++) {
+void insertionSortVector(std::vector<int> *vector, int element) {
+    for (unsigned long i = 0; i < vector->size(); i++) {
         if (vector->at(i) > element) {
             vector->insert(vector->begin() + i, element);
             break;
@@ -60,7 +58,7 @@ void insertion_sort_vector(std::vector<int> *vector, int element) {
  * @param vector 정렬될 벡터
  * @param element 정렬할 원소
  */
-void binary_search_vector(std::vector<int> *vector, int element) {
+void binarySearchVector(std::vector<int> *vector, int element) {
     int left = 0;
     int right = vector->size() - 1;
     int mid;
@@ -81,15 +79,15 @@ void binary_search_vector(std::vector<int> *vector, int element) {
  * @param vector 정렬될 벡터
  * @param index 벡터의 위치를 나타내는 인덱스
  */
-void recursive_sort_vector(std::vector<std::pair<int, int> > *vector,
-                           int index) {
+void recursiveSortVector(std::vector<std::pair<int, int> > *vector,
+                           unsigned long index) {
     if (index == vector->size() - 1) {
         return;
     }
     if (vector->at(index) > vector->at(index + 1)) {
         std::swap(vector->at(index), vector->at(index + 1));
     }
-    recursive_sort_vector(vector, index + 1);
+    recursiveSortVector(vector, index + 1);
 }
 
 /**
@@ -98,20 +96,20 @@ void recursive_sort_vector(std::vector<std::pair<int, int> > *vector,
  * @param pair_vector 정수로 이루어진 쌍들의 벡터
  * @return 정렬된 벡터
  */
-std::vector<int> sort_pair_vector(std::vector<int> vector,
+std::vector<int> sortPairVector(std::vector<int> vector,
                                   std::vector<std::pair<int, int> > pair_vector) {
-    recursive_sort_vector(&pair_vector, 0);
+    recursiveSortVector(&pair_vector, 0);
     std::vector<int> sorted_vector;
 
-    for (int i = 0; i < pair_vector.size(); i++) {
+    for (unsigned long i = 0; i < pair_vector.size(); i++) {
         sorted_vector.push_back(pair_vector[i].first);
     }
     sorted_vector.insert(sorted_vector.begin(), pair_vector[0].second);
-    for (int i = 1; i < pair_vector.size(); i++) {
-        insertion_sort_vector(&sorted_vector, pair_vector[i].second);
+    for (unsigned long i = 1; i < pair_vector.size(); i++) {
+        insertionSortVector(&sorted_vector, pair_vector[i].second);
     }
     if (vector.size() % 2 == 1) {
-        binary_search_vector(&sorted_vector, vector[vector.size() - 1]);
+        binarySearchVector(&sorted_vector, vector[vector.size() - 1]);
     }
     return sorted_vector;
 }
@@ -122,7 +120,7 @@ std::vector<int> sort_pair_vector(std::vector<int> vector,
  */
 void printVector(std::vector<int> vector) {
     std::cout << "- std::vector:\t";
-    for (int i = 0; i < vector.size(); i++) {
+    for (unsigned long i = 0; i < vector.size(); i++) {
         std::cout << vector[i] << " ";
     }
     std::cout << std::endl;
@@ -140,8 +138,8 @@ double sortVector(std::vector<int> vector) {
     float time;
 
     start = clock();
-    pair_vector = make_pairs_vector(vector);
-    sorted_vector = sort_pair_vector(vector, pair_vector);
+    pair_vector = makePairsVector(vector);
+    sorted_vector = sortPairVector(vector, pair_vector);
     end = clock();
     time = static_cast<double>(end - start);
     printVector(sorted_vector);

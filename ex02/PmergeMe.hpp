@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:02:21 by yena              #+#    #+#             */
-/*   Updated: 2023/10/19 20:01:46 by yena             ###   ########.fr       */
+/*   Updated: 2023/10/19 21:45:13 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 #include <algorithm>
 #include "font.hpp"
 #include "merge_insert_vector.hpp"
+#include "merge_insert_list.hpp"
 
 class PmergeMe {
  public:

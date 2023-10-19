@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:56:27 by yena              #+#    #+#             */
-/*   Updated: 2023/10/19 14:52:22 by yena             ###   ########.fr       */
+/*   Updated: 2023/10/19 20:13:47 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void printInfo(int argc, char *argv[]) {
   std::cout << std::endl;
   std::cout << "After:\t";
   std::sort(argv_vector.begin(), argv_vector.end());
-  for (int i = 0; i < argv_vector.size(); i++) {
+  for (unsigned long i = 0; i < argv_vector.size(); i++) {
     std::cout << argv_vector[i] << " ";
   }
   std::cout << std::endl;

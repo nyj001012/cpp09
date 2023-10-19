@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:02:21 by yena              #+#    #+#             */
-/*   Updated: 2023/10/19 19:53:21 by yena             ###   ########.fr       */
+/*   Updated: 2023/10/19 21:44:55 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,25 +54,6 @@ void PmergeMe::setList(std::list<int> list) { this->_list = list; }
 
 void PmergeMe::setElementCount(int element_count) {
   this->_element_count = element_count;
-}
-
-// TODO => 벡터와 리스트 정렬 파일 분리
-
-
-/**
- * sort list with Ford-Johnson algorithm
- * @param list
- * @return
- */
-double sortList(std::list<int> list) {
-  clock_t start, end;
-  double time;
-
-  start = clock();
-  list.sort();
-  end = clock();
-  time = static_cast<double>(end - start);
-  return time;
 }
 
 void PmergeMe::sort() {
