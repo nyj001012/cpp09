@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 19:42:48 by yena              #+#    #+#             */
-/*   Updated: 2023/10/19 21:46:37 by yena             ###   ########.fr       */
+/*   Updated: 2023/10/23 13:55:39 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void binarySearchVector(std::vector<int> *vector, int element);
 void recursiveSortVector(std::vector<std::pair<int, int> > *vector,
                          unsigned long index);
 std::vector<int> sortPairVector(std::vector<int> vector,
-                                 std::vector<std::pair<int, int> > pair_vector);
+                                std::vector<std::pair<int, int> > pair_vector);
 void printVector(std::vector<int> vector);
 double sortVector(std::vector<int> vector);
 
