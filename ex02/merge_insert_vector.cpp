@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 19:42:48 by yena              #+#    #+#             */
-/*   Updated: 2023/10/23 16:50:44 by yena             ###   ########.fr       */
+/*   Updated: 2023/10/23 16:52:21 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,12 @@ void binarySearchVector(std::vector<int> &vector, int element) {
   vector.insert(vector.begin() + left, element);
 }
 
+/**
+ * 두 벡터를 vector에 병합한다. 이는 recursiveMergeSortVector에서 호출된다.
+ * @param vector 병합 결과 벡터
+ * @param left_vector 왼쪽 벡터
+ * @param right_vector 오른쪽 벡터
+ */
 void mergeVector(std::vector<std::pair<int, int> > &vector,
            std::vector<std::pair<int, int> > &left_vector,
            std::vector<std::pair<int, int> > &right_vector) {
@@ -99,7 +105,7 @@ void mergeVector(std::vector<std::pair<int, int> > &vector,
 }
 
 /**
- * 만약 한 쌍의 첫 번째 원소(larger)를 기준으로 재귀를 이용하여 오름차순 정렬한다.
+ * 만약 한 쌍의 첫 번째 원소(larger)를 기준으로 재귀로 병합 정렬을 수행하여 오름차순 정렬한다.
  * @param vector 정렬될 벡터
  * @param index 벡터의 위치를 나타내는 인덱스
  */
