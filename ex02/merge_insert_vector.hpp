@@ -22,10 +22,10 @@
 std::vector<std::pair<int, int> > makePairsVector(std::vector<int> vector);
 void insertionSortVector(std::vector<int> &list, int element);
 void binarySearchVector(std::vector<int> &list, int element);
-void merge(std::vector<std::pair<int, int> > &vector,
+void mergeVector(std::vector<std::pair<int, int> > &vector,
            std::vector<std::pair<int, int> > &left_vector,
            std::vector<std::pair<int, int> > &right_vector);
-void recursiveSortVector(std::vector<std::pair<int, int> > &vector,
+void recursiveMergeSortVector(std::vector<std::pair<int, int> > &vector,
                          unsigned long left, unsigned long right);
 std::vector<int> sortPairVector(std::vector<int> vector,
                                 std::vector<std::pair<int, int> > pair_vector);

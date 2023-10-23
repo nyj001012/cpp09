@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 19:42:48 by yena              #+#    #+#             */
-/*   Updated: 2023/10/23 16:48:08 by yena             ###   ########.fr       */
+/*   Updated: 2023/10/23 16:50:44 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void binarySearchVector(std::vector<int> &vector, int element) {
   vector.insert(vector.begin() + left, element);
 }
 
-void merge(std::vector<std::pair<int, int> > &vector,
+void mergeVector(std::vector<std::pair<int, int> > &vector,
            std::vector<std::pair<int, int> > &left_vector,
            std::vector<std::pair<int, int> > &right_vector) {
   unsigned long i = 0;
@@ -103,16 +103,16 @@ void merge(std::vector<std::pair<int, int> > &vector,
  * @param vector 정렬될 벡터
  * @param index 벡터의 위치를 나타내는 인덱스
  */
-void recursiveSortVector(std::vector<std::pair<int, int> > &vector,
+void recursiveMergeSortVector(std::vector<std::pair<int, int> > &vector,
                          unsigned long left, unsigned long right) {
   if (left >= right)
     return;
   unsigned long mid = left + (right - left) / 2;
   std::vector<std::pair<int, int> > left_vector(vector.begin() + left, vector.begin() + mid + 1);
   std::vector<std::pair<int, int> > right_vector(vector.begin() + mid + 1, vector.begin() + right + 1);
-  recursiveSortVector(left_vector, 0, left_vector.size() - 1);
-  recursiveSortVector(right_vector, 0, right_vector.size() - 1);
-  merge(vector, left_vector, right_vector);
+  recursiveMergeSortVector(left_vector, 0, left_vector.size() - 1);
+  recursiveMergeSortVector(right_vector, 0, right_vector.size() - 1);
+  mergeVector(vector, left_vector, right_vector);
 }
 
 /**
@@ -123,7 +123,7 @@ void recursiveSortVector(std::vector<std::pair<int, int> > &vector,
  */
 std::vector<int> sortPairVector(std::vector<int> vector,
                                 std::vector<std::pair<int, int> > pair_vector) {
-  recursiveSortVector(pair_vector, 0, pair_vector.size() - 1);
+  recursiveMergeSortVector(pair_vector, 0, pair_vector.size() - 1);
   std::vector<int> sorted_vector;
 
   for (unsigned long i = 0; i < pair_vector.size(); i++) {
