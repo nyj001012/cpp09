@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 19:42:48 by yena              #+#    #+#             */
-/*   Updated: 2023/10/23 14:31:21 by yena             ###   ########.fr       */
+/*   Updated: 2023/10/23 15:17:37 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 std::vector<std::pair<int, int> > makePairsVector(std::vector<int> vector);
 void insertionSortVector(std::vector<int> &list, int element);
 void binarySearchVector(std::vector<int> &list, int element);
-void recursiveSortVector(std::vector<std::pair<int, int> > &list,
-                         unsigned long index);
+void recursiveSortVector(std::vector<std::pair<int, int> > &vector,
+                         unsigned long left, unsigned long right);
 std::vector<int> sortPairVector(std::vector<int> vector,
                                 std::vector<std::pair<int, int> > pair_vector);
 void printVector(std::vector<int> vector);
