@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 20:04:36 by yena              #+#    #+#             */
-/*   Updated: 2023/10/23 17:46:32 by yena             ###   ########.fr       */
+/*   Updated: 2023/10/23 18:26:33 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void binarySearchList(std::list<int> &list, int element) {
       right = mid - 1;
     }
   }
+  it = list.begin();
   std::advance(it, left);
   list.insert(it, element);
 }
