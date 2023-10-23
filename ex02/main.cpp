@@ -38,15 +38,15 @@ int main(int argc, char *argv[]) {
   } else {
     try {
       std::vector<int> argv_vector;
-      std::list<int> argv_list;
+      std::deque<int> argv_deque;
       for (int i = 1; i < argc; i++) {
         if (isInt(argv[i]) == false)
           throw std::invalid_argument("Put integer only");
         argv_vector.push_back(std::atoi(argv[i]));
-        argv_list.push_back(std::atoi(argv[i]));
+        argv_deque.push_back(std::atoi(argv[i]));
       }
       printInfo(argc, argv);
-      PmergeMe pmergeMe(argv_vector, argv_list, argc - 1);
+      PmergeMe pmergeMe(argv_vector, argv_deque, argc - 1);
       pmergeMe.sort();
     } catch (std::exception &e) {
       std::cout << F_RED

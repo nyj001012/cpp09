@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:02:21 by yena              #+#    #+#             */
-/*   Updated: 2023/10/23 12:58:43 by yena             ###   ########.fr       */
+/*   Updated: 2023/10/23 18:38:42 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,24 @@
 
 PmergeMe::PmergeMe() {}
 
-PmergeMe::PmergeMe(std::vector<int> vector, std::list<int> list,
+PmergeMe::PmergeMe(std::vector<int> vector, std::deque<int> deque,
                    int element_count) {
   this->_vector = vector;
-  this->_list = list;
+  this->_deque = deque;
   this->_element_count = element_count;
 }
 
 PmergeMe::PmergeMe(const PmergeMe &other) {
   if (this != &other) {
     this->_vector = other._vector;
-    this->_list = other._list;
+    this->_deque = other._deque;
   }
 }
 
 PmergeMe &PmergeMe::operator=(const PmergeMe &other) {
   if (this != &other) {
     this->_vector = other._vector;
-    this->_list = other._list;
+    this->_deque = other._deque;
   }
   return *this;
 }
@@ -44,13 +44,13 @@ PmergeMe::~PmergeMe() {}
 
 std::vector<int> PmergeMe::getVector() const { return this->_vector; }
 
-std::list<int> PmergeMe::getList() const { return this->_list; }
+std::deque<int> PmergeMe::getDeque() const { return this->_deque; }
 
 int PmergeMe::getElementCount() const { return this->_element_count; }
 
 void PmergeMe::setVector(std::vector<int> vector) { this->_vector = vector; }
 
-void PmergeMe::setList(std::list<int> list) { this->_list = list; }
+void PmergeMe::setDeque(std::deque<int> deque) { this->_deque = deque; }
 
 void PmergeMe::setElementCount(int element_count) {
   this->_element_count = element_count;
@@ -58,9 +58,9 @@ void PmergeMe::setElementCount(int element_count) {
 
 void PmergeMe::sort() {
   double vector_time = sortVector(this->getVector());
-  double list_time = sortList(this->getList());
+  double deque_time = sortDeque(this->getDeque());
   this->printResult("std::vector", vector_time);
-  this->printResult("std::list", list_time);
+  this->printResult("std::deque", deque_time);
 }
 
 void PmergeMe::printResult(std::string data_type, double time) const {

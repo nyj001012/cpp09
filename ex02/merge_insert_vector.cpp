@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 19:42:48 by yena              #+#    #+#             */
-/*   Updated: 2023/10/23 16:52:56 by yena             ###   ########.fr       */
+/*   Updated: 2023/10/23 18:49:52 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ std::vector<std::pair<int, int> > makePairsVector(std::vector<int> vector) {
   std::vector<std::pair<int, int> > pair_vector;
 
   if (vector.size() % 2 == 1) vector.push_back(0);
-  for (int i = 0; i < size; i += 2) {
+  for (unsigned int i = 0; i < size; i += 2) {
     if (vector[i] > vector[i + 1]) {
       std::pair<int, int> pair = std::make_pair(vector[i], vector[i + 1]);
       pair_vector.push_back(pair);
@@ -61,11 +61,10 @@ void insertionSortVector(std::vector<int> &vector, int element) {
 void binarySearchVector(std::vector<int> &vector, int element) {
   int left = 0;
   int right = vector.size() - 1;
-  int mid;
 
   while (left <= right) {
-    mid = (left + right) / 2;
-    if (vector.at(mid) < element) {
+    int mid = left + (right - left) / 2;
+    if (vector.at(mid) <= element) {
       left = mid + 1;
     } else if (vector.at(mid) > element) {
       right = mid - 1;
@@ -81,8 +80,8 @@ void binarySearchVector(std::vector<int> &vector, int element) {
  * @param right_vector 오른쪽 벡터
  */
 void mergeVector(std::vector<std::pair<int, int> > &vector,
-           std::vector<std::pair<int, int> > &left_vector,
-           std::vector<std::pair<int, int> > &right_vector) {
+                 std::vector<std::pair<int, int> > &left_vector,
+                 std::vector<std::pair<int, int> > &right_vector) {
   unsigned long i = 0;
   unsigned long j = 0;
   unsigned long k = 0;
@@ -110,7 +109,7 @@ void mergeVector(std::vector<std::pair<int, int> > &vector,
  * @param index 벡터의 위치를 나타내는 인덱스
  */
 void recursiveMergeSortVector(std::vector<std::pair<int, int> > &vector,
-                         unsigned long left, unsigned long right) {
+                              unsigned long left, unsigned long right) {
   if (left >= right)
     return;
   unsigned long mid = left + (right - left) / 2;

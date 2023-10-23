@@ -19,31 +19,31 @@
 
 #include <iostream>
 #include <vector>
-#include <list>
+#include <deque>
 #include <algorithm>
 #include "font.hpp"
 #include "merge_insert_vector.hpp"
-#include "merge_insert_list.hpp"
+#include "merge_insert_deque.hpp"
 
 class PmergeMe {
  public:
   PmergeMe();
-  PmergeMe(std::vector<int> vector, std::list<int> list, int element_count);
+  PmergeMe(std::vector<int> vector, std::deque<int> deque, int element_count);
   PmergeMe(const PmergeMe &other);
   PmergeMe &operator=(const PmergeMe &other);
   ~PmergeMe();
   std::vector<int> getVector() const;
-  std::list<int> getList() const;
+  std::deque<int> getDeque() const;
   int getElementCount() const;
   void setVector(std::vector<int> v);
-  void setList(std::list<int> l);
+  void setDeque(std::deque<int> l);
   void setElementCount(int element_count);
   void sort();
   void printResult(std::string data_type, double time) const;
 
  private:
   std::vector<int> _vector;
-  std::list<int> _list;
+  std::deque<int> _deque;
   int _element_count;
 };
 

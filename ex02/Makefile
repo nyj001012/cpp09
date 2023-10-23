@@ -1,7 +1,8 @@
 NAME = sort
 SRCS = main.cpp \
-	   merge_insert_list.cpp \
+	   merge_insert_deque.cpp \
 	   merge_insert_vector.cpp \
+	   utils.cpp \
 	   PmergeMe.cpp
 OBJS = ${SRCS:.cpp=.o}
 

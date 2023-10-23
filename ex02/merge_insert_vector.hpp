@@ -20,8 +20,8 @@
 #include "PmergeMe.hpp"
 
 std::vector<std::pair<int, int> > makePairsVector(std::vector<int> vector);
-void insertionSortVector(std::vector<int> &list, int element);
-void binarySearchVector(std::vector<int> &list, int element);
+void insertionSortVector(std::vector<int> &deque, int element);
+void binarySearchVector(std::vector<int> &deque, int element);
 void mergeVector(std::vector<std::pair<int, int> > &vector,
            std::vector<std::pair<int, int> > &left_vector,
            std::vector<std::pair<int, int> > &right_vector);
