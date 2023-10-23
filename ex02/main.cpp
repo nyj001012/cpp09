@@ -6,11 +6,12 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:56:27 by yena              #+#    #+#             */
-/*   Updated: 2023/10/23 17:52:26 by yena             ###   ########.fr       */
+/*   Updated: 2023/10/23 18:20:42 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
+#include "utils.hpp"
 
 void printInfo(int argc, char *argv[]) {
   std::vector<int> argv_vector;
@@ -18,7 +19,7 @@ void printInfo(int argc, char *argv[]) {
   std::cout << "Before:\t";
   for (int i = 1; i < argc; i++) {
     std::cout << argv[i] << " ";
-    argv_vector.push_back(std::strtod(argv[i], nullptr));
+    argv_vector.push_back(std::atoi(argv[i]));
   }
   std::cout << std::endl;
   std::cout << "After:\t";
@@ -35,15 +36,23 @@ int main(int argc, char *argv[]) {
               << "Error: Wrong number of arguments"
               << FB_DEFAULT << std::endl;
   } else {
-    printInfo(argc, argv);
-    std::vector<int> argv_vector;
-    std::list<int> argv_list;
-    for (int i = 1; i < argc; i++) {
-      argv_vector.push_back(std::strtod(argv[i], nullptr));
-      argv_list.push_back(std::strtod(argv[i], nullptr));
+    try {
+      std::vector<int> argv_vector;
+      std::list<int> argv_list;
+      for (int i = 1; i < argc; i++) {
+        if (isInt(argv[i]) == false)
+          throw std::invalid_argument("Put integer only");
+        argv_vector.push_back(std::atoi(argv[i]));
+        argv_list.push_back(std::atoi(argv[i]));
+      }
+      printInfo(argc, argv);
+      PmergeMe pmergeMe(argv_vector, argv_list, argc - 1);
+      pmergeMe.sort();
+    } catch (std::exception &e) {
+      std::cout << F_RED
+                << "Error: " << e.what()
+                << FB_DEFAULT << std::endl;
     }
-    PmergeMe pmergeMe(argv_vector, argv_list, argc - 1);
-    pmergeMe.sort();
+    return 0;
   }
-  return 0;
 }
