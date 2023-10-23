@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:56:27 by yena              #+#    #+#             */
-/*   Updated: 2023/10/23 12:58:43 by yena             ###   ########.fr       */
+/*   Updated: 2023/10/23 17:52:26 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void printInfo(int argc, char *argv[]) {
   std::cout << "Before:\t";
   for (int i = 1; i < argc; i++) {
     std::cout << argv[i] << " ";
-    argv_vector.push_back(std::stoi(argv[i]));
+    argv_vector.push_back(std::strtod(argv[i], nullptr));
   }
   std::cout << std::endl;
   std::cout << "After:\t";
@@ -39,8 +39,8 @@ int main(int argc, char *argv[]) {
     std::vector<int> argv_vector;
     std::list<int> argv_list;
     for (int i = 1; i < argc; i++) {
-      argv_vector.push_back(std::stoi(argv[i]));
-      argv_list.push_back(std::stoi(argv[i]));
+      argv_vector.push_back(std::strtod(argv[i], nullptr));
+      argv_list.push_back(std::strtod(argv[i], nullptr));
     }
     PmergeMe pmergeMe(argv_vector, argv_list, argc - 1);
     pmergeMe.sort();
