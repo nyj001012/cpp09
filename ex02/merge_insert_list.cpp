@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 20:04:36 by yena              #+#    #+#             */
-/*   Updated: 2023/10/23 14:30:59 by yena             ###   ########.fr       */
+/*   Updated: 2023/10/23 17:46:32 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ std::list<std::pair<int, int> > makePairsList(std::list<int> list) {
   unsigned int size = list.size() % 2 == 1 ? list.size() - 1 : list.size();
   unsigned int i = 0;
 
- for (it = list.begin(); i < size; i += 2, it++) {
+  for (it = list.begin(); i < size; i += 2, it++) {
     std::list<int>::iterator prev_it = it;
     std::advance(it, 1);
     if (*prev_it > *it) {
@@ -82,23 +82,62 @@ void binarySearchList(std::list<int> &list, int element) {
 }
 
 /**
+ * 두 리스트를 list에 병합한다. 이는 recursiveMergeSortList에서 호출된다.
+ * @param list 병합 결과 리스트
+ * @param left_list 왼쪽 리스트
+ * @param right_list 오른쪽 리스트
+ */
+void mergeList(std::list<std::pair<int, int> > &list,
+               std::list<std::pair<int, int> > &left_list,
+               std::list<std::pair<int, int> > &right_list) {
+  std::list<std::pair<int, int> >::iterator it = list.begin();
+  std::list<std::pair<int, int> >::iterator left_it = left_list.begin();
+  std::list<std::pair<int, int> >::iterator right_it = right_list.begin();
+
+  while (left_it != left_list.end() && right_it != right_list.end()) {
+    if (left_it->first <= right_it->first) {
+      *it = *left_it;
+      left_it++;
+    } else {
+      *it = *right_it;
+      right_it++;
+    }
+    it++;
+  }
+  while (left_it != left_list.end()) {
+    *it = *left_it;
+    left_it++;
+    it++;
+  }
+  while (right_it != right_list.end()) {
+    *it = *right_it;
+    right_it++;
+    it++;
+  }
+}
+
+/**
  * 만약 한 쌍의 첫 번째 원소(larger)를 기준으로 재귀를 이용하여 오름차순 정렬한다.
  * @param list 정렬될 리스트
  * @param index 리스트의 위치를 나타내는 인덱스
  */
-void recursiveSortList(std::list<std::pair<int, int> > &list, unsigned long index) {
-  std::list<std::pair<int, int> >::iterator prev_it = list.begin();
-  std::list<std::pair<int, int> >::iterator next_it = list.begin();
-  std::advance(prev_it, index);
-  std::advance(next_it, index + 1);
-
-  if (index == list.size() - 1) {
+void recursiveMergeSortList(std::list<std::pair<int, int> > &list,
+                            unsigned long left, unsigned long right) {
+  if (left >= right)
     return;
-  }
-  if (*prev_it > *next_it) {
-    std::swap(*prev_it, *next_it);
-  }
-  recursiveSortList(list, index + 1);
+  unsigned long mid = left + (right - left) / 2;
+  std::list<std::pair<int, int> >::iterator left_it = list.begin();
+  std::list<std::pair<int, int> >::iterator mid_it = list.begin();
+  std::list<std::pair<int, int> >::iterator right_it = list.begin();
+  std::advance(left_it, left);
+  std::advance(mid_it, mid + 1);
+  std::advance(right_it, right + 1);
+  std::list<std::pair<int, int> > left_list(left_it, mid_it);
+  std::list<std::pair<int, int> > right_list(mid_it, right_it);
+
+  recursiveMergeSortList(left_list, 0, left_list.size() - 1);
+  recursiveMergeSortList(right_list, 0, right_list.size() - 1);
+  mergeList(list, left_list, right_list);
 }
 
 /**
@@ -109,7 +148,7 @@ void recursiveSortList(std::list<std::pair<int, int> > &list, unsigned long inde
  */
 std::list<int> sortPairList(std::list<int> list,
                             std::list<std::pair<int, int> > pair_list) {
-  recursiveSortList(pair_list, 0);
+  recursiveMergeSortList(pair_list, 0, pair_list.size() - 1);
   std::list<int> sorted_list;
 
   for (std::list<std::pair<int, int> >::iterator it = pair_list.begin(); it != pair_list.end(); it++) {
