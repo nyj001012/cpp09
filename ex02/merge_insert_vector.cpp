@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 19:42:48 by yena              #+#    #+#             */
-/*   Updated: 2023/10/23 13:55:41 by yena             ###   ########.fr       */
+/*   Updated: 2023/10/23 14:31:58 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
  * @return 짝으로 이루어진 벡터
  */
 std::vector<std::pair<int, int> > makePairsVector(std::vector<int> vector) {
-  int size = vector.size() % 2 == 1 ? vector.size() - 1 : vector.size();
+  unsigned int size = vector.size() % 2 == 1 ? vector.size() - 1 : vector.size();
   std::vector<std::pair<int, int> > pair_vector;
 
   if (vector.size() % 2 == 1) vector.push_back(0);
@@ -44,10 +44,10 @@ std::vector<std::pair<int, int> > makePairsVector(std::vector<int> vector) {
  * @param vector 정렬될 벡터
  * @param element 정렬할 원소
  */
-void insertionSortVector(std::vector<int> *vector, int element) {
-  for (unsigned long i = 0; i < vector->size(); i++) {
-    if (vector->at(i) > element) {
-      vector->insert(vector->begin() + i, element);
+void insertionSortVector(std::vector<int> &vector, int element) {
+  for (unsigned long i = 0; i < vector.size(); i++) {
+    if (vector.at(i) > element) {
+      vector.insert(vector.begin() + i, element);
       break;
     }
   }
@@ -58,20 +58,20 @@ void insertionSortVector(std::vector<int> *vector, int element) {
  * @param vector 정렬될 벡터
  * @param element 정렬할 원소
  */
-void binarySearchVector(std::vector<int> *vector, int element) {
+void binarySearchVector(std::vector<int> &vector, int element) {
   int left = 0;
-  int right = vector->size() - 1;
+  int right = vector.size() - 1;
   int mid;
 
   while (left <= right) {
     mid = (left + right) / 2;
-    if (vector->at(mid) < element) {
+    if (vector.at(mid) < element) {
       left = mid + 1;
-    } else if (vector->at(mid) > element) {
+    } else if (vector.at(mid) > element) {
       right = mid - 1;
     }
   }
-  vector->insert(vector->begin() + left, element);
+  vector.insert(vector.begin() + left, element);
 }
 
 /**
@@ -79,13 +79,13 @@ void binarySearchVector(std::vector<int> *vector, int element) {
  * @param vector 정렬될 벡터
  * @param index 벡터의 위치를 나타내는 인덱스
  */
-void recursiveSortVector(std::vector<std::pair<int, int> > *vector,
+void recursiveSortVector(std::vector<std::pair<int, int> > &vector,
                          unsigned long index) {
-  if (index == vector->size() - 1) {
+  if (index == vector.size() - 1) {
     return;
   }
-  if (vector->at(index) > vector->at(index + 1)) {
-    std::swap(vector->at(index), vector->at(index + 1));
+  if (vector.at(index) > vector.at(index + 1)) {
+    std::swap(vector.at(index), vector.at(index + 1));
   }
   recursiveSortVector(vector, index + 1);
 }
@@ -98,7 +98,7 @@ void recursiveSortVector(std::vector<std::pair<int, int> > *vector,
  */
 std::vector<int> sortPairVector(std::vector<int> vector,
                                 std::vector<std::pair<int, int> > pair_vector) {
-  recursiveSortVector(&pair_vector, 0);
+  recursiveSortVector(pair_vector, 0);
   std::vector<int> sorted_vector;
 
   for (unsigned long i = 0; i < pair_vector.size(); i++) {
@@ -106,10 +106,10 @@ std::vector<int> sortPairVector(std::vector<int> vector,
   }
   sorted_vector.insert(sorted_vector.begin(), pair_vector[0].second);
   for (unsigned long i = 1; i < pair_vector.size(); i++) {
-    insertionSortVector(&sorted_vector, pair_vector[i].second);
+    insertionSortVector(sorted_vector, pair_vector[i].second);
   }
   if (vector.size() % 2 == 1) {
-    binarySearchVector(&sorted_vector, vector[vector.size() - 1]);
+    binarySearchVector(sorted_vector, vector[vector.size() - 1]);
   }
   return sorted_vector;
 }

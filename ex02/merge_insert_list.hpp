@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 20:04:36 by yena              #+#    #+#             */
-/*   Updated: 2023/10/19 21:43:21 by yena             ###   ########.fr       */
+/*   Updated: 2023/10/23 14:30:31 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 #include "PmergeMe.hpp"
 
 std::list<std::pair<int, int> > makePairsList(std::list<int> list);
-void insertionSortList(std::list<int> *list, int element);
-void binarySearchList(std::list<int> *list, int element);
-void recursiveSortList(std::list<std::pair<int, int> > *list, unsigned long index);
+void insertionSortList(std::list<int> &list, int element);
+void binarySearchList(std::list<int> &list, int element);
+void recursiveSortList(std::list<std::pair<int, int> > &list, unsigned long index);
 std::list<int> sortPairList(std::list<int> list,
                             std::list<std::pair<int, int> > pair_list);
 void printList(std::list<int> list);

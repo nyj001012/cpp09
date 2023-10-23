@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 19:42:48 by yena              #+#    #+#             */
-/*   Updated: 2023/10/23 13:55:39 by yena             ###   ########.fr       */
+/*   Updated: 2023/10/23 14:31:21 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 #include "PmergeMe.hpp"
 
 std::vector<std::pair<int, int> > makePairsVector(std::vector<int> vector);
-void insertionSortVector(std::vector<int> *vector, int element);
-void binarySearchVector(std::vector<int> *vector, int element);
-void recursiveSortVector(std::vector<std::pair<int, int> > *vector,
+void insertionSortVector(std::vector<int> &list, int element);
+void binarySearchVector(std::vector<int> &list, int element);
+void recursiveSortVector(std::vector<std::pair<int, int> > &list,
                          unsigned long index);
 std::vector<int> sortPairVector(std::vector<int> vector,
                                 std::vector<std::pair<int, int> > pair_vector);
