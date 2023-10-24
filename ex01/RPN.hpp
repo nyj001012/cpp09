@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RPN.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: yena <yena@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 12:29:45 by yena              #+#    #+#             */
-/*   Updated: 2023/10/16 13:50:08 by yena             ###   ########.fr       */
+/*   Updated: 2023/10/24 14:25:30 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 #include <iostream>
 #include <stack>
+
 #include "font.hpp"
 
 class RPN {
@@ -31,6 +32,7 @@ class RPN {
   std::stack<int> getTokenStack() const;
   void setTokenStack(std::stack<int> token_stack);
   int calculate(std::string token);
+  void removeWhiteSpace(std::string &expression);
   void run(std::string expression);
   ~RPN();
 
@@ -38,4 +40,4 @@ class RPN {
   std::stack<int> token_stack;
 };
 
-#endif //EX01__RPN_HPP_
+#endif  // EX01__RPN_HPP_

@@ -1,4 +1,4 @@
-NAME = sort
+NAME = PmergeMe
 SRCS = main.cpp \
 	   merge_insert_deque.cpp \
 	   merge_insert_vector.cpp \
