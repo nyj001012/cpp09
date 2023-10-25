@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 12:58:43 by yena              #+#    #+#             */
-/*   Updated: 2023/10/23 18:36:03 by yena             ###   ########.fr       */
+/*   Updated: 2023/10/25 15:47:34 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 
 std::deque<std::pair<int, int> > makePairsDeque(std::deque<int> deque);
 void insertionSortDeque(std::deque<int> &deque, int element);
-void binarySearchDeque(std::deque<int> &deque, int element);
+void binarySearchDeque(std::deque<int> &deque, int element, int left, int right);
 void mergeDeque(std::deque<std::pair<int, int> > &deque,
                std::deque<std::pair<int, int> > &left_deque,
                std::deque<std::pair<int, int> > &right_deque);

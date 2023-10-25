@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 19:42:48 by yena              #+#    #+#             */
-/*   Updated: 2023/10/23 18:49:52 by yena             ###   ########.fr       */
+/*   Updated: 2023/10/25 15:44:17 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,28 +40,13 @@ std::vector<std::pair<int, int> > makePairsVector(std::vector<int> vector) {
 }
 
 /**
- * 삽입 정렬을 실행한다.
- * @param vector 정렬될 벡터
- * @param element 정렬할 원소
- */
-void insertionSortVector(std::vector<int> &vector, int element) {
-  for (unsigned long i = 0; i < vector.size(); i++) {
-    if (vector.at(i) > element) {
-      vector.insert(vector.begin() + i, element);
-      break;
-    }
-  }
-}
-
-/**
  * 이진 탐색하여 원소를 알맞은 자리에 insert한다.
  * @param vector 정렬될 벡터
  * @param element 정렬할 원소
+ * @param left 벡터의 왼쪽 끝 인덱스
+ * @param right 벡터의 오른쪽 끝 인덱스
  */
-void binarySearchVector(std::vector<int> &vector, int element) {
-  int left = 0;
-  int right = vector.size() - 1;
-
+void binarySearchVector(std::vector<int> &vector, int element, int left, int right) {
   while (left <= right) {
     int mid = left + (right - left) / 2;
     if (vector.at(mid) <= element) {
@@ -136,10 +121,10 @@ std::vector<int> sortPairVector(std::vector<int> vector,
   }
   sorted_vector.insert(sorted_vector.begin(), pair_vector[0].second);
   for (unsigned long i = 1; i < pair_vector.size(); i++) {
-    insertionSortVector(sorted_vector, pair_vector[i].second);
+    binarySearchVector(sorted_vector, pair_vector[i].second, 0, i);
   }
   if (vector.size() % 2 == 1) {
-    binarySearchVector(sorted_vector, vector[vector.size() - 1]);
+    binarySearchVector(sorted_vector, vector[vector.size() - 1], 0, sorted_vector.size() - 1);
   }
   return sorted_vector;
 }

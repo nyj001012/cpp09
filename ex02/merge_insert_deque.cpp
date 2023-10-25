@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 18:22:20 by yena              #+#    #+#             */
-/*   Updated: 2023/10/23 18:50:01 by yena             ###   ########.fr       */
+/*   Updated: 2023/10/25 15:48:35 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,10 @@ void insertionSortDeque(std::deque<int> &deque, int element) {
  * 이진 탐색하여 원소를 알맞은 자리에 insert한다.
  * @param deque 정렬될 벡터
  * @param element 정렬할 원소
+ * @param left 덱의 왼쪽 끝 인덱스
+ * @param right 덱의 오른쪽 끝 인덱스
  */
-void binarySearchDeque(std::deque<int> &deque, int element) {
-  int left = 0;
-  int right = deque.size() - 1;
-
+void binarySearchDeque(std::deque<int> &deque, int element, int left, int right) {
   while (left <= right) {
     int mid = left + (right - left) / 2;
     if (deque.at(mid) <= element) {
@@ -136,10 +135,10 @@ std::deque<int> sortPairDeque(std::deque<int> deque,
   }
   sorted_deque.insert(sorted_deque.begin(), pair_deque[0].second);
   for (unsigned long i = 1; i < pair_deque.size(); i++) {
-    insertionSortDeque(sorted_deque, pair_deque[i].second);
+    binarySearchDeque(sorted_deque, pair_deque[i].second, 0, i);
   }
   if (deque.size() % 2 == 1) {
-    binarySearchDeque(sorted_deque, deque[deque.size() - 1]);
+    binarySearchDeque(sorted_deque, deque[deque.size() - 1], 0, sorted_deque.size() - 1);
   }
   return sorted_deque;
 }
