@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 12:09:16 by yena              #+#    #+#             */
-/*   Updated: 2023/12/06 15:48:15 by yena             ###   ########.fr       */
+/*   Updated: 2023/12/06 16:10:31 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,11 @@ BitcoinExchange::BitcoinExchange(const BitcoinExchange &other) {
 
 BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &other) {
   if (this != &other) {
-    this->_bitcoin_data = other._bitcoin_data;
   }
   return *this;
 }
 
 BitcoinExchange::~BitcoinExchange() {}
-
-void BitcoinExchange::setBitcoinData(std::string key, float value) {
-  this->_bitcoin_data.insert(std::make_pair(key, value));
-}
-
-std::multimap<std::string, float> BitcoinExchange::getBitcoinData() {
-  return this->_bitcoin_data;
-}
 
 /**
  * 날짜가 유효한지 검사한다.
@@ -89,26 +80,25 @@ bool isValidDateFormat(std::string date) {
 }
 
 /**
- * 비트코인 구입 날짜와 구입 개수를 입력받아 멀티맵에 저장한다.
+ * 비트코인 구입 날짜와 구입 개수를 입력받아 가격을 출력한다.
  * @param file_name 비트코인 구입 날짜와 구입 개수가 저장된 파일 이름
  */
-void BitcoinExchange::readBitcoinData(std::string file_name) {
+void BitcoinExchange::calculateBitcoinData(std::string file_name, std::map<std::string, float> data) {
   std::ifstream ifs(file_name);
   std::string line;
-  std::string key;
-  std::string value;
 
   if (!ifs.is_open())
     throw std::runtime_error("Error: file not found");
   std::getline(ifs, line);
   while (std::getline(ifs, line)) {
-    key = line.substr(0, line.find(" | "));
-    value = line.substr(line.find(" | ") + 3);
+    std::string key = line.substr(0, line.find(" | "));
+    std::string value = line.substr(line.find(" | ") + 3);
     if (key.empty() || value.empty()) {
       ifs.close();
       throw std::runtime_error("Error: invalid file format");
     }
-    this->setBitcoinData(key, std::stod(value));
+    float f_value = static_cast<float>(std::strtod(value.c_str(), NULL));
+    this->printPrice(key, f_value, data);
   }
   ifs.close();
 }
@@ -143,19 +133,13 @@ float calculatePrice(std::string date, float count, std::map<std::string, float>
  * "input.txt의 date => input.txt의 count = price"의 형식으로 출력한다.
  * @param data 비트코인 시세표
  */
-void BitcoinExchange::printPrice(std::map<std::string, float> data) {
-  std::multimap<std::string, float>::iterator it;
-  std::multimap<std::string, float> bitcoin_data = this->getBitcoinData();
-  float price;
-
-  for (it = bitcoin_data.begin(); it != bitcoin_data.end(); it++) {
-    try {
-      if (!isValidDateFormat(it->first))
-        throw std::runtime_error("Error: bad input => " + it->first);
-      price = calculatePrice(it->first, it->second, data);
-      std::cout << it->first << " => " << it->second << " = " << price << std::endl;
-    } catch (std::exception &e) {
-      std::cout << F_RED << e.what() << FB_DEFAULT << std::endl;
-    }
+void BitcoinExchange::printPrice(std::string date, float count, std::map<std::string, float> data) {
+  try {
+    if (!isValidDateFormat(date))
+      throw std::runtime_error("Error: bad input => " + date);
+    float price = calculatePrice(date, count, data);
+    std::cout << date << " => " << count << " = " << price << std::endl;
+  } catch (std::exception &e) {
+    std::cout << F_RED << e.what() << FB_DEFAULT << std::endl;
   }
 }

@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 12:09:16 by yena              #+#    #+#             */
-/*   Updated: 2023/10/15 15:01:24 by yena             ###   ########.fr       */
+/*   Updated: 2023/12/06 15:59:44 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,8 @@ class BitcoinExchange {
   BitcoinExchange(const BitcoinExchange &other);
   BitcoinExchange &operator=(const BitcoinExchange &other);
   ~BitcoinExchange();
-  void setBitcoinData(std::string key, float value);
-  std::multimap<std::string, float> getBitcoinData();
-  void readBitcoinData(std::string file_name);
-  void printPrice(std::map<std::string, float> data);
-
- private:
-  std::multimap<std::string, float> _bitcoin_data;
+  void calculateBitcoinData(std::string file_name, std::map<std::string, float> data);
+  void printPrice(std::string date, float count, std::map<std::string, float> data);
 };
 
 #endif //EX00__BITCOINEXCHANGE_HPP_
