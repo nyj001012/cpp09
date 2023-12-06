@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:56:27 by yena              #+#    #+#             */
-/*   Updated: 2023/10/23 18:20:42 by yena             ###   ########.fr       */
+/*   Updated: 2023/12/06 15:26:00 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,16 @@ int main(int argc, char *argv[]) {
     try {
       std::vector<int> argv_vector;
       std::deque<int> argv_deque;
+      std::list<int> argv_list;
       for (int i = 1; i < argc; i++) {
         if (isInt(argv[i]) == false)
           throw std::invalid_argument("Put integer only");
         argv_vector.push_back(std::atoi(argv[i]));
         argv_deque.push_back(std::atoi(argv[i]));
+        argv_list.push_back(std::atoi(argv[i]));
       }
       printInfo(argc, argv);
-      PmergeMe pmergeMe(argv_vector, argv_deque, argc - 1);
+      PmergeMe pmergeMe(argv_vector, argv_deque, argv_list, argc - 1);
       pmergeMe.sort();
     } catch (std::exception &e) {
       std::cout << F_RED

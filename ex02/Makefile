@@ -2,6 +2,7 @@ NAME = PmergeMe
 SRCS = main.cpp \
 	   merge_insert_deque.cpp \
 	   merge_insert_vector.cpp \
+	   merge_insert_list.cpp \
 	   utils.cpp \
 	   PmergeMe.cpp
 OBJS = ${SRCS:.cpp=.o}

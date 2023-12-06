@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:02:21 by yena              #+#    #+#             */
-/*   Updated: 2023/10/19 21:45:13 by yena             ###   ########.fr       */
+/*   Updated: 2023/12/06 15:25:16 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,17 @@
 #include <iostream>
 #include <vector>
 #include <deque>
+#include <list>
 #include <algorithm>
 #include "font.hpp"
 #include "merge_insert_vector.hpp"
 #include "merge_insert_deque.hpp"
+#include "merge_insert_list.hpp"
 
 class PmergeMe {
  public:
   PmergeMe();
-  PmergeMe(std::vector<int> vector, std::deque<int> deque, int element_count);
+  PmergeMe(std::vector<int> vector, std::deque<int> deque, std::list<int> list, int element_count);
   PmergeMe(const PmergeMe &other);
   PmergeMe &operator=(const PmergeMe &other);
   ~PmergeMe();
@@ -44,6 +46,7 @@ class PmergeMe {
  private:
   std::vector<int> _vector;
   std::deque<int> _deque;
+  std::list<int> _list;
   int _element_count;
 };
 

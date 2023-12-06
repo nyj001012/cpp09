@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:02:21 by yena              #+#    #+#             */
-/*   Updated: 2023/10/23 18:38:42 by yena             ###   ########.fr       */
+/*   Updated: 2023/12/06 15:26:14 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@
 PmergeMe::PmergeMe() {}
 
 PmergeMe::PmergeMe(std::vector<int> vector, std::deque<int> deque,
-                   int element_count) {
+                   std::list<int> list, int element_count) {
   this->_vector = vector;
   this->_deque = deque;
+  this->_list = list;
   this->_element_count = element_count;
 }
 
@@ -57,10 +58,12 @@ void PmergeMe::setElementCount(int element_count) {
 }
 
 void PmergeMe::sort() {
-  double vector_time = sortVector(this->getVector());
-  double deque_time = sortDeque(this->getDeque());
+  double vector_time = sortVector(_vector);
+  double deque_time = sortDeque(_deque);
+  double list_time = sortList(_list);
   this->printResult("std::vector", vector_time);
   this->printResult("std::deque", deque_time);
+  this->printResult("std::list", list_time);
 }
 
 void PmergeMe::printResult(std::string data_type, double time) const {
