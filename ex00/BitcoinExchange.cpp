@@ -6,7 +6,7 @@
 /*   By: yena <yena@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 12:09:16 by yena              #+#    #+#             */
-/*   Updated: 2023/10/15 15:19:18 by yena             ###   ########.fr       */
+/*   Updated: 2023/12/06 15:48:15 by yena             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ bool isValidDate(std::string year, std::string month, std::string day) {
   int days_per_month[12] = {31, 28, 31, 30, 31, 30,
                             31, 31, 30, 31, 30, 31};
 
-  if (i_year < 2009 || i_year > 2021)
+  if (i_year < 2009)
     return false;
   if (i_month < 1 || i_month > 12)
     return false;
