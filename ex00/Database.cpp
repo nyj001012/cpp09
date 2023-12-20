@@ -39,20 +39,19 @@ std::map<std::string, float> Database::readDatabase() {
   std::ifstream ifs("data.csv");
   std::map<std::string, float> data;
   std::string line;
-  std::string key;
-  std::string value;
 
   if (!ifs.is_open())
     throw std::runtime_error("Error: could not open file.");
   std::getline(ifs, line);
   while (std::getline(ifs, line)) {
-    key = line.substr(0, line.find(","));
-    value = line.substr(line.find(",") + 1, line.length());
+    std::string key = line.substr(0, line.find(","));
+    std::string value = line.substr(line.find(",") + 1, line.length());
     if (key.empty() || value.empty()) {
       ifs.close();
       throw std::runtime_error("Error: invalid file format.");
     }
-    data.insert(std::pair<std::string, float>(key, std::stod(value)));
+    float f_value = static_cast<float>(std::strtod(value.c_str(), NULL));
+    data.insert(std::pair<std::string, float>(key, f_value));
   }
   ifs.close();
   return data;

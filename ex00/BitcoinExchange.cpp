@@ -39,9 +39,9 @@ BitcoinExchange::~BitcoinExchange() {}
  * @return true or false
  */
 bool isValidDate(std::string year, std::string month, std::string day) {
-  int i_year = std::stoi(year);
-  int i_month = std::stoi(month);
-  int i_day = std::stoi(day);
+  int i_year = std::atoi(year.c_str());
+  int i_month = std::atoi(month.c_str());
+  int i_day = std::atoi(day.c_str());
   int days_per_month[12] = {31, 28, 31, 30, 31, 30,
                             31, 31, 30, 31, 30, 31};
 
@@ -70,9 +70,9 @@ bool isValidDateFormat(std::string date) {
     return false;
   if (date[4] != '-' || date[7] != '-')
     return false;
-  if (!std::strtol(year.c_str(), nullptr, 10) ||
-      !std::strtol(month.c_str(), nullptr, 10) ||
-      !std::strtol(day.c_str(), nullptr, 10))
+  if (!std::strtol(year.c_str(), NULL, 10) ||
+      !std::strtol(month.c_str(), NULL, 10) ||
+      !std::strtol(day.c_str(), NULL, 10))
     return false;
   if (!isValidDate(year, month, day))
     return false;
