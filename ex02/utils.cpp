@@ -47,7 +47,7 @@ bool isInt(std::string str) {
 
 bool isFloat(std::string str) {
   try {
-    float num = std::stof(str);
+    float num = static_cast<float>(std::strtod(str.c_str(), NULL));
     (void) num;
   } catch (std::exception &e) {
     return false;
@@ -57,7 +57,7 @@ bool isFloat(std::string str) {
 
 bool isDouble(std::string str) {
   try {
-    double num = std::stod(str);
+    double num = std::strtod(str.c_str(), NULL);
     (void) num;
   } catch (std::exception &e) {
     return false;
