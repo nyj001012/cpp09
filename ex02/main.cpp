@@ -41,8 +41,8 @@ int main(int argc, char *argv[]) {
       std::deque<int> argv_deque;
       std::list<int> argv_list;
       for (int i = 1; i < argc; i++) {
-        if (isInt(argv[i]) == false)
-          throw std::invalid_argument("Put integer only");
+        if (!isPositiveInt(argv[i]))
+          throw std::invalid_argument("Put Positive integer only: " + std::string(argv[i]));
         argv_vector.push_back(std::atoi(argv[i]));
         argv_deque.push_back(std::atoi(argv[i]));
         argv_list.push_back(std::atoi(argv[i]));

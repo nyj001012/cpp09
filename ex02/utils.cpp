@@ -33,11 +33,11 @@ bool isChar(std::string str) {
   return true;
 }
 
-bool isInt(std::string str) {
+bool isPositiveInt(std::string str) {
   unsigned long start = 0;
 
-  if (str[0] == '+' || str[0] == '-')
-    start++;
+  if (str[0] == '0')
+    return false;
   for (unsigned long i = start; i < str.length(); i++) {
     if (!std::isdigit(str[i]))
       return false;
