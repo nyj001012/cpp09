@@ -29,15 +29,15 @@ class RPN {
   RPN &operator=(const RPN &rpn);
   bool isOperator(std::string token);
   bool isDigit(std::string token);
-  std::stack<int> getTokenStack() const;
-  void setTokenStack(std::stack<int> token_stack);
-  int calculate(std::string token);
+  std::stack<double> getTokenStack() const;
+  void setTokenStack(std::stack<double> token_stack);
+  double calculate(std::string token);
   void removeWhiteSpace(std::string &expression);
   void run(std::string expression);
   ~RPN();
 
  private:
-  std::stack<int> token_stack;
+  std::stack<double> _token_stack;
 };
 
 #endif  // EX01__RPN_HPP_

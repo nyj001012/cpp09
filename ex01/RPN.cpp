@@ -24,17 +24,17 @@ RPN::RPN(const RPN &rpn) {
 
 RPN &RPN::operator=(const RPN &rpn) {
   if (this != &rpn) {
-    this->token_stack = rpn.token_stack;
+    this->_token_stack = rpn._token_stack;
   }
   return *this;
 }
 
 RPN::~RPN() {}
 
-std::stack<int> RPN::getTokenStack() const { return this->token_stack; }
+std::stack<double> RPN::getTokenStack() const { return this->_token_stack; }
 
-void RPN::setTokenStack(std::stack<int> token_stack) {
-  this->token_stack = token_stack;
+void RPN::setTokenStack(std::stack<double> _token_stack) {
+  this->_token_stack = _token_stack;
 }
 
 bool RPN::isOperator(std::string token) {
@@ -43,19 +43,19 @@ bool RPN::isOperator(std::string token) {
 }
 
 bool RPN::isDigit(std::string token) {
-  if (token.length() == 1 && token[0] >= '0' && token[0] <= '9') return true;
-  return false;
+  double d_token = std::strtod(token.c_str(), NULL);
+  if (d_token == 0 && token != "0") return false;
+  return true;
 }
 
-int RPN::calculate(std::string token) {
-  std::stack<int> token_stack = this->getTokenStack();
-  if (token_stack.size() < 2)
+double RPN::calculate(std::string token) {
+  if (_token_stack.size() < 2)
     throw std::invalid_argument("Error: Invalid expression.");
-  int result = 0;
-  int a = token_stack.top();
-  token_stack.pop();
-  int b = token_stack.top();
-  token_stack.pop();
+  double result = 0;
+  double a = _token_stack.top();
+  _token_stack.pop();
+  double b = _token_stack.top();
+  _token_stack.pop();
 
   if (token == "+")
     result = b + a;
@@ -67,8 +67,7 @@ int RPN::calculate(std::string token) {
     if (a == 0) throw std::invalid_argument("Error: Division by zero.");
     result = b / a;
   }
-  token_stack.push(result);
-  this->setTokenStack(token_stack);
+  _token_stack.push(result);
   return result;
 }
 
@@ -80,7 +79,7 @@ void RPN::removeWhiteSpace(std::string &expression) {
 }
 
 void RPN::run(std::string expression) {
-  int result = 0;
+  double result = 0;
   size_t i = 0;
 
   if (expression.empty())
@@ -91,12 +90,12 @@ void RPN::run(std::string expression) {
     if (isOperator(token))
       result = calculate(token);
     else if (isDigit(token))
-      token_stack.push(std::atoi(token.c_str()));
+      _token_stack.push(std::strtod(token.c_str(), NULL));
     else
       throw std::invalid_argument("Error: Invalid token: " + token);
     i += token.length() + 1;
   }
-  if (this->token_stack.size() > 1)
+  if (this->_token_stack.size() > 1)
     throw std::invalid_argument("Error: Invalid expression.");
   std::cout << F_GREEN << result << FB_DEFAULT << std::endl;
 }
