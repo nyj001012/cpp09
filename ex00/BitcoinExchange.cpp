@@ -38,15 +38,13 @@ BitcoinExchange::~BitcoinExchange() {}
  * @param day 일
  * @return true or false
  */
-bool isValidDate(std::string year, std::string month, std::string day) {
+bool isValidDateValue(std::string year, std::string month, std::string day) {
   int i_year = std::atoi(year.c_str());
   int i_month = std::atoi(month.c_str());
   int i_day = std::atoi(day.c_str());
   int days_per_month[12] = {31, 28, 31, 30, 31, 30,
                             31, 31, 30, 31, 30, 31};
 
-  if (i_year < 2009)
-    return false;
   if (i_month < 1 || i_month > 12)
     return false;
   if ((i_year % 4 == 0 && i_year % 100 != 0) || i_year % 400 == 0)
@@ -61,11 +59,13 @@ bool isValidDate(std::string year, std::string month, std::string day) {
  * @param date 날짜
  * @return true or false
  */
-bool isValidDateFormat(std::string date) {
+bool isValidDateFormat(std::string date, std::string min_date_from_database) {
   std::string year = date.substr(0, 4);
   std::string month = date.substr(5, 2);
   std::string day = date.substr(8, 2);
 
+  if (date < min_date_from_database)
+    return false;
   if (date.length() != 10)
     return false;
   if (date[4] != '-' || date[7] != '-')
@@ -74,7 +74,7 @@ bool isValidDateFormat(std::string date) {
       !std::strtol(month.c_str(), NULL, 10) ||
       !std::strtol(day.c_str(), NULL, 10))
     return false;
-  if (!isValidDate(year, month, day))
+  if (!isValidDateValue(year, month, day))
     return false;
   return true;
 }
@@ -117,25 +117,25 @@ float calculatePrice(std::string date, float count, std::map<std::string, float>
     price = data[date] * count;
   } else {
     std::map<std::string, float>::iterator it = data.lower_bound(date);
-    if (it == data.end())
-      throw std::runtime_error("Error: no data");
-    it--;
+    it == data.end() ? it-- : it;
     price = it->second * count;
   }
-  if (price <= 0)
-    throw std::runtime_error("Error: not a positive number");
-  if (price > 1000)
-    throw std::runtime_error("Error: too large a number");
   return price;
 }
 
 /**
  * "input.txt의 date => input.txt의 count = price"의 형식으로 출력한다.
+ * @param date 비트코인 구입 날짜
+ * @param count 비트코인 구입 개수
  * @param data 비트코인 시세표
  */
 void BitcoinExchange::printPrice(std::string date, float count, std::map<std::string, float> data) {
   try {
-    if (!isValidDateFormat(date))
+    if (count <= 0)
+      throw std::runtime_error("Error: not a positive number");
+    if (count > 1000)
+      throw std::runtime_error("Error: too large a number");
+    if (!isValidDateFormat(date, data.begin()->first))
       throw std::runtime_error("Error: bad input => " + date);
     float price = calculatePrice(date, count, data);
     std::cout << date << " => " << count << " = " << price << std::endl;
