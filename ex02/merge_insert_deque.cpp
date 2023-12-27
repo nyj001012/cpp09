@@ -135,10 +135,20 @@ std::deque<int> sortPairDeque(std::deque<int> deque,
   }
   sorted_deque.insert(sorted_deque.begin(), pair_deque[0].second);
   for (unsigned long i = 1; i < pair_deque.size(); i++) {
-    binarySearchDeque(sorted_deque, pair_deque[i].second, 0, i);
+    size_t right = std::find(
+        sorted_deque.begin(),
+        sorted_deque.end(),
+        pair_deque[i].first
+    ) - sorted_deque.begin();
+    binarySearchDeque(sorted_deque, pair_deque[i].second, 0, static_cast<int>(right) - 1);
   }
   if (deque.size() % 2 == 1) {
-    binarySearchDeque(sorted_deque, deque[deque.size() - 1], 0, sorted_deque.size() - 1);
+    binarySearchDeque(
+        sorted_deque,
+        deque[deque.size() - 1],
+        0,
+        static_cast<int>(sorted_deque.size()) - 1
+    );
   }
   return sorted_deque;
 }

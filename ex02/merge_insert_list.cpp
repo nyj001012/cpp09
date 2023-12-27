@@ -156,9 +156,15 @@ std::list<int> sortPairList(std::list<int> list,
     sorted_list.push_back(it->first);
   }
   sorted_list.insert(sorted_list.begin(), pair_list.begin()->second);
-  int idx = 1;
   for (std::list<std::pair<int, int> >::iterator it = ++pair_list.begin(); it != pair_list.end(); it++) {
-    binarySearchList(sorted_list, it->second, 0, idx++);
+    size_t right = 0;
+    for (std::list<int>::iterator sorted_it = sorted_list.begin(); sorted_it != sorted_list.end();
+         sorted_it++, right++) {
+      if (*sorted_it > it->second) {
+        break;
+      }
+    }
+    binarySearchList(sorted_list, it->second, 0, right);
   }
   if (list.size() % 2 == 1) {
     std::list<int>::iterator last_it = list.begin();

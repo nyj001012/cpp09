@@ -121,10 +121,20 @@ std::vector<int> sortPairVector(std::vector<int> vector,
   }
   sorted_vector.insert(sorted_vector.begin(), pair_vector[0].second);
   for (unsigned long i = 1; i < pair_vector.size(); i++) {
-    binarySearchVector(sorted_vector, pair_vector[i].second, 0, i);
+    size_t right = std::find(
+        sorted_vector.begin(),
+        sorted_vector.end(),
+        pair_vector[i].first
+    ) - sorted_vector.begin();
+    binarySearchVector(sorted_vector, pair_vector[i].second, 0, static_cast<int>(right) - 1);
   }
   if (vector.size() % 2 == 1) {
-    binarySearchVector(sorted_vector, vector[vector.size() - 1], 0, sorted_vector.size() - 1);
+    binarySearchVector(
+        sorted_vector,
+        vector[vector.size() - 1],
+        0,
+        static_cast<int>(sorted_vector.size()) - 1
+    );
   }
   return sorted_vector;
 }
