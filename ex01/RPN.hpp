@@ -28,7 +28,7 @@ class RPN {
   RPN(const RPN &rpn);
   RPN &operator=(const RPN &rpn);
   bool isOperator(std::string token);
-  bool isDigit(std::string token);
+  bool isValidDigit(std::string token);
   std::stack<double> getTokenStack() const;
   void setTokenStack(std::stack<double> token_stack);
   double calculate(std::string token);

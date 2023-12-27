@@ -42,9 +42,10 @@ bool RPN::isOperator(std::string token) {
   return false;
 }
 
-bool RPN::isDigit(std::string token) {
+bool RPN::isValidDigit(std::string token) {
   double d_token = std::strtod(token.c_str(), NULL);
   if (d_token == 0 && token != "0") return false;
+  if (d_token >= 10 || d_token < 0) return false;
   return true;
 }
 
@@ -89,7 +90,7 @@ void RPN::run(std::string expression) {
     std::string token = expression.substr(i, space_position - i);
     if (isOperator(token))
       result = calculate(token);
-    else if (isDigit(token))
+    else if (isValidDigit(token))
       _token_stack.push(std::strtod(token.c_str(), NULL));
     else
       throw std::invalid_argument("Error: Invalid token: " + token);
